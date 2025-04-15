@@ -1,0 +1,24 @@
+% !TEX encoding = UTF-8 Unicode
+
+% Beispiel für ein LaTeX-Dokument im Format "seminarvorlage"
+\documentclass[ngerman]{seminarvorlage}
+%\documentclass[ngerman]{article}
+% ngerman = Deutsch in neuer Rechtschreibung, alternativ english
+\usepackage[ngerman]{babel} % automatische Sprachunterstützung
+
+\usepackage[utf8]{inputenc} % Kodierung der Non-ASCII-Zeichen
+\usepackage[T1]{fontenc} % Moderne Fonts, Trennung von Wörtern mit Umlauten
+\usepackage{cleveref} % für bequeme Referenzen, siehe \cref unten
+
+\begin{document}
+
+\nocite{Anderson:1992}
+\nocite{CHI}
+\nocite{CongerLock:1995}
+\nocite{Mackay:1995}
+\nocite{Schwartz:1995}
+
+\bibliographystyle{abbrv-haake}
+\bibliography{literatur} 
+
+\end{document}

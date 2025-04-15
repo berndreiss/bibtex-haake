@@ -234,7 +234,7 @@ FUNCTION {format.title}
 { title empty$
     { "" }
     %{ title "t" change.case$ }%Originale Zeile
-    { title "t" }%Neue Zeile für Groß-/Kleinschreibung in Titeln
+    { title }%Neue Zeile für Groß-/Kleinschreibung in Titeln
   if$
 }
 

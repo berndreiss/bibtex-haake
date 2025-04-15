@@ -11,6 +11,6 @@ TODOs:
 - ", in" für Proceedings
 - kein "in" für Artikel 
 - URL + Available at + Last visited: bei @online ergänzen (ACHTUNG hier weichen wir absichtlich von der Wordvorlage ab!!)
-- Großbuchstaben im Titel nicht klein machen
+- ~~Großbuchstaben im Titel nicht klein machen~~
 - Booktitle wird bei Monographien nicht erkannt
 - ~~erledigtes Item~~

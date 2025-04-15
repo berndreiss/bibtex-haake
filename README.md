@@ -1,4 +1,4 @@
-# TODOs
+## TODOs
 
 - Einträge alphabetisch ordnen
 - Vorname vor Nachname
@@ -15,7 +15,7 @@
 - Booktitle wird bei Monographien nicht erkannt
 - ~~erledigtes Item~~
 
-# Hinweise
+## Hinweise
 
 Statt ```pdflatex``` kann auch ```make``` bzw. zum Aufräumen ```make clean``` verwendet werden (zumindest auf Linux-Systemen sollte das laufen). Ansonsten eben ```pdflatex paper && bibtex paper && pdflatex paper```.
 

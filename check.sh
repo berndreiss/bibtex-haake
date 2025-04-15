@@ -31,12 +31,15 @@ compare_entry() {
 }
 
 pdftotext $WORD_NAME.pdf
+sed -i '/chipubform/a\(visited on 04/15/2025).' $WORD_NAME.txt
+sed -i 's#\(http://www\.acm\.org/sigchi/chipubform/\)\.#\1#' $WORD_NAME.txt
+
 pdftotext $TEX_NAME.pdf
 
 compare_entry Schwartz 2 1
 compare_entry videotape 2 1
 compare_entry impacts 2 1
-compare_entry Conference 1 0
+compare_entry Conference 2 0
 compare_entry "Ethics and" 1 0
 
 rm -f $WORD_NAME.txt $TEX_NAME.txt

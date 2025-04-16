@@ -19,4 +19,4 @@
 
 Statt ```pdflatex``` kann auch ```make``` bzw. zum Aufräumen ```make clean``` verwendet werden (zumindest auf Linux-Systemen sollte das laufen). Ansonsten eben ```pdflatex paper && bibtex paper && pdflatex paper```.
 
-Das Bash-Skript ```check.sh``` checkt das Ergebnis gegen die Wordvorlage. Dependencies: ```paste``` und ```pdftotext``` (ich nehme mal an, dass ```grep``` zur Verfügung steht :) ). Sollte ```make``` Probleme machen besser vorher paper.pdf erzeugen, sonst lässt das Skript das nämlich laufen. Das Skript ist jetzt vor allem interessant, um die beiden Einträge "side-by-side" zu sehen. Später sollte es dann aber keine Unterschiede mehr ausgeben.
+Das Bash-Skript ```check.sh``` checkt das Ergebnis gegen die Wordvorlage. Dependencies: ```paste``` und ```pdftotext``` (ich nehme mal an, dass ```sed``` und ```grep``` zur Verfügung stehen :) ). Sollte ```make``` Probleme machen besser vorher paper.pdf erzeugen, sonst lässt das Skript das nämlich laufen. Das Skript ist jetzt vor allem interessant, um die beiden Einträge "side-by-side" zu sehen. Später sollte es dann aber keine Unterschiede mehr ausgeben.

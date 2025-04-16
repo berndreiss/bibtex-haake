@@ -1,7 +1,7 @@
 ## TODOs
 
 - Einträge alphabetisch ordnen
-- Vorname vor Nachname
+- Nachname, Vorname statt Vorname Nachname
 - "eds." statt editors und in Klammern 
 - Bei @article editors mit (eds.) angeben falls vorhanden
 - issue_date berücksichtigen bei @article und @inproceedings

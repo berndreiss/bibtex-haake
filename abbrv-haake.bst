@@ -27,6 +27,8 @@ ENTRY
     type
     volume
     year
+    url
+    urldate
   }
   {}
   { label }
@@ -231,6 +233,26 @@ FUNCTION {format.title}
     { "" }
     %{ title "t" change.case$ }%Originale Zeile
     { title }%Neue Zeile für Groß-/Kleinschreibung in Titeln
+  if$
+}
+
+FUNCTION {format.url}
+{
+  url empty$
+    { "" }
+    {
+      "Available at \url{" url * "}" *   
+      urldate empty$
+        'skip$
+        { " (visited on " *
+      urldate #6 #2 substring$    % MM
+      * "/" * 
+      urldate #9 #2 substring$    % DD
+      * "/" *
+      urldate #1 #4 substring$    % YYYY
+      * ")" * }
+      if$
+    }
   if$
 }
 
@@ -687,6 +709,21 @@ FUNCTION {inproceedings}
       format.pages output
     }
   if$
+  new.block
+  note output
+  fin.entry
+}
+
+FUNCTION {online}
+{ output.bibitem
+  author empty$
+    {}
+    { format.authors "author" output.check
+      new.block }
+  if$
+  format.title "title" output.check
+  new.block
+  format.url output
   new.block
   note output
   fin.entry

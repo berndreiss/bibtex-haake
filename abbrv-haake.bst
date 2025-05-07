@@ -201,10 +201,6 @@ FUNCTION {format.names}
           namesleft #1 >
             { ", " * t * }         
             {
-              numnames #2 >
-                { "," * }         
-                'skip$
-              if$
               t "others" =
                 { " et~al." * }
                 { ", and " * t * } 
@@ -283,7 +279,7 @@ FUNCTION {format.url}
   url empty$
     { "" }
     {
-      "Available at \url{" url * "}" *   
+      " Available at \url{" url * "}" *   
       urldate empty$
         'skip$
         { " (visited on " *
@@ -626,6 +622,7 @@ FUNCTION {format.incoll.inproc.crossref}
   " \cite{" * crossref * "}" *
 }
 
+
 FUNCTION {article}
 {
   output.bibitem
@@ -756,7 +753,10 @@ FUNCTION {book}
   format.edition output
   format.date "year" output.check
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -770,7 +770,10 @@ FUNCTION {booklet}
   address output
   format.date output
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -806,7 +809,10 @@ FUNCTION {inbook}
   format.edition output
   format.date "year" output.check
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -831,7 +837,10 @@ FUNCTION {incollection}
     }
   if$
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -856,7 +865,10 @@ FUNCTION {inproceedings}
     }
   if$
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -871,7 +883,10 @@ FUNCTION {online}
   new.block
   format.url output
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -907,7 +922,10 @@ FUNCTION {manual}
   format.edition output
   format.date output
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -922,7 +940,10 @@ FUNCTION {mastersthesis}
   address output
   format.date "year" output.check
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -935,7 +956,10 @@ FUNCTION {misc}
   howpublished output
   format.date output
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
   empty.misc.check
 }
@@ -951,7 +975,10 @@ FUNCTION {phdthesis}
   address output
   format.date "year" output.check
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -986,7 +1013,10 @@ FUNCTION {proceedings}
     }
   if$
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 
@@ -1001,7 +1031,10 @@ FUNCTION {techreport}
   address output
   format.date "year" output.check
   new.block
-  note output
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
   fin.entry
 }
 

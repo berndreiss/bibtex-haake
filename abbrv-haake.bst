@@ -194,18 +194,7 @@ FUNCTION {format.names}
       namesleft #0 >
     }
  { 
-    s nameptr "{f}" format.name$ 'initials :=
-
-    initials #1 string.length$ =
-    {
-       %EINE INITIALIE
-       s nameptr "{vv~}{ll}{,~f.}{~jj}" format.name$ 't :=
-    }
-    {
-       %MEHR ALS EINE INITIALIE
-       s nameptr "{vv~}{ll}{,~f{.}{}}{~jj}" format.name$ 't :=
-    }
-    if$
+    s nameptr "{vv~}{ll}{,~f.}{~jj}" format.name$ 't :=
       nameptr #1 >
         {
           namesleft #1 >

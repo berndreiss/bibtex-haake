@@ -15,6 +15,8 @@ compare_entry() {
     local pattern="$3"
     WORD=$(grep -A $2 "$1" $WORD_NAME.txt | paste -sd' ')
     WORD=$(echo "$WORD" | sed 's/Conger./Conger/g')
+    WORD=$(echo "$WORD" | sed 's/R.E./R. E./g')
+    WORD=$(echo "$WORD" | sed 's/W.E./W. E./g')
     TEX=$(grep -A $3 "$1" $TEX_NAME.txt | paste -sd' ')
     TEX=$(echo "$TEX" | sed "s/’/'/g")
     TEX=$(echo "$TEX" | sed "s/–/-/g")

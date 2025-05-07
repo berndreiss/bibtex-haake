@@ -190,29 +190,76 @@ FUNCTION {format.names}
   #1 'nameptr :=
   s num.names$ 'numnames :=
   numnames 'namesleft :=
-    { namesleft #0 > }
-    { s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ 't :=
+    {
+      namesleft #0 >
+    }
+ { 
+    s nameptr "{f}" format.name$ 'initials :=
+
+    initials #1 string.length$ =
+    {
+       %EINE INITIALIE
+       s nameptr "{vv~}{ll}{,~f.}{~jj}" format.name$ 't :=
+    }
+    {
+       %MEHR ALS EINE INITIALIE
+       s nameptr "{vv~}{ll}{,~f{.}{}}{~jj}" format.name$ 't :=
+    }
+    if$
       nameptr #1 >
-        { namesleft #1 >
-            { ", " * t * }
-            { numnames #2 >
-                { "," * }
+        {
+          namesleft #1 >
+            { ", " * t * }         
+            {
+              numnames #2 >
+                { "," * }         
                 'skip$
               if$
               t "others" =
                 { " et~al." * }
-                { " and " * t * }
+                { ", and " * t * } 
               if$
             }
           if$
         }
-        't
+        { t }
       if$
       nameptr #1 + 'nameptr :=
       namesleft #1 - 'namesleft :=
     }
   while$
 }
+
+
+%ORIGINAL
+%FUNCTION {format.names}
+%{ 's :=
+  %#1 'nameptr :=
+  %s num.names$ 'numnames :=
+  %numnames 'namesleft :=
+    %{ namesleft #0 > }
+    %{ s nameptr "{f.~}{vv~}{ll}{, jj}" format.name$ 't :=
+      %nameptr #1 >
+        %{ namesleft #1 >
+            %{ ", " * t * }
+            %{ numnames #2 >
+                %{ "," * }
+                %'skip$
+              %if$
+              %t "others" =
+                %{ " et~al." * }
+                %{ " and " * t * }
+              %if$
+            %}
+          %if$
+        %}
+        %'t
+      %if$
+      %nameptr #1 + 'nameptr :=
+      %namesleft #1 - 'namesleft :=
+    %}
+  %while$
+%}
 
 FUNCTION {format.authors}
 { author empty$
@@ -448,12 +495,30 @@ FUNCTION {format.chapter.pages}
   if$
 }
 
+FUNCTION {format.location.date}
+{
+   address empty$
+   {
+      location empty$
+      {
+         format.date
+      }
+      {
+         location * ", " * format.date
+      }
+      if$
+   }
+   {
+      address * ", " * format.date
+   }
+   if$
+}
 FUNCTION {format.in.ed.booktitle}
 { booktitle empty$
     { "" }
     { editor empty$
-        { "in " booktitle emphasize * "(" * }
-        { "in " format.editors * ", " * booktitle emphasize * }
+        { "in " booktitle emphasize * " (" * format.location.date * ")" *} 
+        { "in " format.editors * ", " * booktitle emphasize * " (" * format.location.date * ")" *} 
       if$
     }
   if$
@@ -684,12 +749,10 @@ FUNCTION {incollection}
     { format.in.ed.booktitle "booktitle" output.check
       format.bvolume output
       format.number.series output
-      format.chapter.pages output
       new.sentence
       publisher "publisher" output.check
-      address output
       format.edition output
-      format.date "year" output.check
+      format.chapter.pages output
     }
     { format.incoll.inproc.crossref output.nonnull
       format.chapter.pages output
@@ -710,6 +773,8 @@ FUNCTION {inproceedings}
   crossref missing$
     { format.in.ed.booktitle "booktitle" output.check
       format.bvolume output
+      organization output
+      publisher output
       format.number.series output
       %format.pages output %ORIGINAL
       format.pages output

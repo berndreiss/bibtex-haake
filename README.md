@@ -1,14 +1,14 @@
 ## TODOs
 
 - ~~Einträge alphabetisch ordnen~~
-- Nachname, Vorname statt Vorname Nachname
+- ~~Nachname, Vorname statt Vorname Nachname~~
 - "eds." statt editors und in Klammern 
 - Bei @article editors mit (eds.) angeben falls vorhanden
 - issue_date berücksichtigen bei @article und @inproceedings
 - Jahreszahl bei @article und  @inpoceedings in Klammern mit Angabe von Monat/Jahreszeit 
 - Seitenzahlen am Ende des Eintrags 
-- kein "pages" oder ähnliches vor Seiten
-- ", in" für Proceedings
+- ~~kein "pages" oder ähnliches vor Seiten~~
+- ~~", in" für Proceedings~~
 - kein "in" für Artikel 
 - ~~URL + Available at + (visited on mm/dd/yyyy). bei @online ergänzen (ACHTUNG hier weichen wir absichtlich von der Wordvorlage ab!!)~~
 - ~~Großbuchstaben im Titel nicht klein machen~~

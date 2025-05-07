@@ -9,7 +9,7 @@
 - ~~Seitenzahlen am Ende des Eintrags~~
 - ~~kein "pages" oder ähnliches vor Seiten~~
 - ~~", in" für Proceedings~~
-- ~~kein "in" für Artikel ~~
+- ~~kein "in" für Artikel~~
 - ~~URL + Available at + (visited on mm/dd/yyyy). bei @online ergänzen (ACHTUNG hier weichen wir absichtlich von der Wordvorlage ab!!)~~
 - ~~Großbuchstaben im Titel nicht klein machen~~
 - Booktitle wird bei Monographien nicht erkannt

@@ -32,6 +32,7 @@ ENTRY
     type
     volume
     year
+    issue_date
     url
     urldate
   }
@@ -626,24 +627,80 @@ FUNCTION {format.incoll.inproc.crossref}
 }
 
 FUNCTION {article}
-{ output.bibitem
+{
+  output.bibitem
   format.authors "author" output.check
   new.block
   format.title "title" output.check
   new.block
-  crossref missing$
-    { journal emphasize "journal" output.check
-      format.vol.num.pages output
-      format.date "year" output.check
-    }
-    { format.article.crossref output.nonnull
-      format.pages output
+
+  journal emphasize "journal" output.check
+  's :=
+  s write$  
+
+  volume empty$
+    'skip$
+    {
+      " " volume * write$  
     }
   if$
+
+  number empty$
+    'skip$
+    {
+      ", " number * write$  
+    }
+  if$
+
+  issue_date empty$
+  {
+     year empty$ 
+     { 'skip$}
+     { 
+        " (" year * ")" * write$ 
+     }
+     if$
+  }
+  {
+     " (" issue_date * ")" * write$ 
+  }
+  if$
+
+  pages empty$
+    'skip$
+    {
+      ", " pages n.dashify * write$  
+    }
+  if$
+
   new.block
   note output
+
+  "." write$
   fin.entry
 }
+
+
+%ORIGINAL
+%FUNCTION {article}
+%{ output.bibitem
+  %format.authors "author" output.check
+  %new.block
+  %format.title "title" output.check
+  %new.block
+  %crossref missing$
+    %{ journal emphasize "journal" output.check
+      %format.vol.num.pages output
+      %format.date "year" output.check
+    %}
+    %{ format.article.crossref output.nonnull
+      %format.pages output
+    %}
+  %if$
+  %new.block
+  %note output
+  %fin.entry
+%}
 
 FUNCTION {book}
 { output.bibitem

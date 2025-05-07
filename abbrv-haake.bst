@@ -263,8 +263,8 @@ FUNCTION {format.editors}
     { "" }
     { editor format.names
       editor num.names$ #1 >
-        { ", editors" * }
-        { ", editor" * }
+        { " (eds.)" * }
+        { " (ed.)" * }
       if$
     }
   if$
@@ -629,19 +629,41 @@ FUNCTION {format.incoll.inproc.crossref}
 FUNCTION {article}
 {
   output.bibitem
-  format.authors "author" output.check
+
+  author empty$
+  {
+     editor empty$
+     { "" }
+     {
+       format.editors "editor" output.check
+     }
+     if$
+  }
+  {
+    format.authors "author" output.check
+  }
+  if$
   new.block
   format.title "title" output.check
   new.block
 
-  journal emphasize "journal" output.check
-  's :=
-  s write$  
+  journal empty$ 
+  {
+    series emphasize "series" output.check
+    's :=
+    s write$
+  }
+  {
+    journal emphasize "journal" output.check
+    's :=
+    s write$  
+  }
+  if$
 
   volume empty$
     'skip$
     {
-      " " volume * write$  
+      " " volume emphasize * write$  
     }
   if$
 
@@ -674,7 +696,11 @@ FUNCTION {article}
   if$
 
   new.block
-  note output
+
+  note empty$
+    'skip$
+    { " (" note * ")" * write$ }
+    if$
 
   "." write$
   fin.entry

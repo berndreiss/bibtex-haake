@@ -3,6 +3,8 @@
 TEX_NAME=paper
 WORD_NAME=VorlageWord
 
+clear
+
 echo "Kompiliere .tex Datei..."
 make > /dev/null 2>&1
 
@@ -17,6 +19,7 @@ compare_entry() {
     WORD=$(echo "$WORD" | sed 's/Conger./Conger/g')
     WORD=$(echo "$WORD" | sed 's/R.E./R. E./g')
     WORD=$(echo "$WORD" | sed 's/W.E./W. E./g')
+    WORD=$(echo "$WORD" | sed 's/K.D./K. D./g')
     TEX=$(grep -A $3 "$1" $TEX_NAME.txt | paste -sd' ')
     TEX=$(echo "$TEX" | sed "s/’/'/g")
     TEX=$(echo "$TEX" | sed "s/–/-/g")
@@ -46,7 +49,9 @@ compare_entry Schwartz 2 2
 compare_entry videotape 2 2
 compare_entry impacts 2 2
 compare_entry Conference 2 3
-compare_entry "Ethics and" 1 0
+compare_entry "Ethics and" 1 1
+
+echo ""
 
 rm -f $WORD_NAME.txt $TEX_NAME.txt
 make clean

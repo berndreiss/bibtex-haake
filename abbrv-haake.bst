@@ -104,7 +104,7 @@ FUNCTION {new.block}
 }
 
 FUNCTION {new.sentence}
-{ output.state after.block =
+ output.state after.block =
     'skip$
     { output.state before.all =
         'skip$
@@ -1053,32 +1053,63 @@ FUNCTION {editor.organization.sort}
 }
 
 FUNCTION {presort}
-{ type$ "book" =
-  type$ "inbook" =
-  or
-    'author.editor.sort
-    { type$ "proceedings" =
-        'editor.organization.sort
-        { type$ "manual" =
-            'author.organization.sort
-            'author.sort
+{
+  author empty$
+    {
+      editor empty$
+        {
+          title empty$
+            { key empty$
+                { "to sort, need author, editor, title or key in " cite$ * warning$
+                  ""
+                }
+                { key sortify }
+              if$
+            }
+            { title sortify }
           if$
         }
+        { editor sort.format.names }
       if$
     }
+    { author sort.format.names }
   if$
-  "    "
-  *
-  year field.or.null sortify
-  *
-  "    "
-  *
-  title field.or.null
-  sort.format.title
-  *
+  "    " *
+  year field.or.null sortify *
+  "    " *
+  title field.or.null sort.format.title *
   #1 entry.max$ substring$
   'sort.key$ :=
 }
+
+%ALTE PRESORT FUNKTION
+%FUNCTION {presort}
+%{ type$ "book" =
+  %type$ "inbook" =
+  %or
+    %'author.editor.sort
+    %{ type$ "proceedings" =
+        %'editor.organization.sort
+        %{ type$ "manual" =
+            %'author.organization.sort
+            %'author.sort
+          %if$
+        %}
+      %if$
+    %}
+  %if$
+  %"    "
+  %*
+  %year field.or.null sortify
+  %*
+  %"    "
+  %*
+  %title field.or.null
+  %sort.format.title
+  %*
+  %#1 entry.max$ substring$
+  %'sort.key$ :=
+%}
 
 ITERATE {presort}
 

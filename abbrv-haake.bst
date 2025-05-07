@@ -15,6 +15,7 @@ ENTRY
     institution
     journal
     key
+    location
     month
     note
     number
@@ -387,12 +388,24 @@ FUNCTION {format.pages}
 { pages empty$
     { "" }
     { pages multi.page.check
-        { "pages" pages n.dashify tie.or.space.connect }
-        { "page" pages tie.or.space.connect }
+        { "" pages n.dashify tie.or.space.connect }
+        { "" pages tie.or.space.connect }
       if$
     }
   if$
 }
+
+%ORIGINAL FORMAT PAGES FUNKTION
+%FUNCTION {format.pages}
+%{ pages empty$
+    %{ "" }
+    %{ pages multi.page.check
+        %{ "pages" pages n.dashify tie.or.space.connect }
+        %{ "page" pages tie.or.space.connect }
+      %if$
+    %}
+  %if$
+%}
 
 FUNCTION {format.vol.num.pages}
 { volume field.or.null
@@ -435,8 +448,8 @@ FUNCTION {format.in.ed.booktitle}
 { booktitle empty$
     { "" }
     { editor empty$
-        { "In " booktitle emphasize * }
-        { "In " format.editors * ", " * booktitle emphasize * }
+        { "in " booktitle emphasize * "(" * }
+        { "in " format.editors * ", " * booktitle emphasize * }
       if$
     }
   if$
@@ -479,10 +492,10 @@ FUNCTION {format.article.crossref}
           warning$
           ""
         }
-        { "In {\em " journal * "\/}" * }
+        { "in {\em " journal * "\/}" * }
       if$
     }
-    { "In " key * }
+    { "in " key * }
   if$
   " \cite{" * crossref * "}" *
 }
@@ -507,7 +520,7 @@ FUNCTION {format.crossref.editor}
 FUNCTION {format.book.crossref}
 { volume empty$
     { "empty volume in " cite$ * "'s crossref of " * crossref * warning$
-      "In "
+      "in "
     }
     { "Volume" volume tie.or.space.connect
       " of " *
@@ -543,13 +556,13 @@ FUNCTION {format.incoll.inproc.crossref}
               crossref * warning$
               ""
             }
-            { "In {\em " booktitle * "\/}" * }
+            { "in {\em " booktitle * "\/}" * }
           if$
         }
-        { "In " key * }
+        { "in " key * }
       if$
     }
-    { "In " format.crossref.editor * }
+    { "in " format.crossref.editor * }
   if$
   " \cite{" * crossref * "}" *
 }
@@ -632,7 +645,9 @@ FUNCTION {inbook}
     }
   if$
   new.block
-  format.btitle "title" output.check
+  format.title output
+  %format.title "title" output.check %ORIGINAL
+  %new.block %ORIGINAL
   crossref missing$
     { format.bvolume output
       format.chapter.pages "chapter and pages" output.check
@@ -658,8 +673,9 @@ FUNCTION {incollection}
 { output.bibitem
   format.authors "author" output.check
   new.block
-  format.title "title" output.check
-  new.block
+  format.title output
+  %format.title "title" output.check %ORIGINAL
+  %new.block %ORIGINAL
   crossref missing$
     { format.in.ed.booktitle "booktitle" output.check
       format.bvolume output
@@ -684,26 +700,15 @@ FUNCTION {inproceedings}
 { output.bibitem
   format.authors "author" output.check
   new.block
-  format.title "title" output.check
-  new.block
+  format.title output
+  %format.title "title" output.check %ORIGINAL
+  %new.block %ORIGINAL
   crossref missing$
     { format.in.ed.booktitle "booktitle" output.check
       format.bvolume output
       format.number.series output
+      %format.pages output %ORIGINAL
       format.pages output
-      address empty$
-        { organization publisher new.sentence.checkb
-          organization output
-          publisher output
-          format.date "year" output.check
-        }
-        { address output.nonnull
-          format.date "year" output.check
-          new.sentence
-          organization output
-          publisher output
-        }
-      if$
     }
     { format.incoll.inproc.crossref output.nonnull
       format.pages output

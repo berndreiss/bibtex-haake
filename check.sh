@@ -39,8 +39,8 @@ sed -i 's#\(http://www\.acm\.org/sigchi/chipubform/\)\.#\1#' $WORD_NAME.txt
 pdftotext $TEX_NAME.pdf
 
 compare_entry Schwartz 2 1
-compare_entry videotape 2 1
-compare_entry impacts 2 1
+compare_entry videotape 2 2
+compare_entry impacts 2 2
 compare_entry Conference 2 3
 compare_entry "Ethics and" 1 0
 
